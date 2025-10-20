@@ -97,9 +97,19 @@ def plot_area_over_time(time_series_data):
 if __name__ == '__main__':
     # --- Configuration ---
     #image_folder = "SatImage"  # The folder where your TIF files are located
-    image_folder = "E:\\teams\\Kantubek"
+    #image_folder = "E:\\teams\\Kantubek"
     # --- Parameters for your specific data ---
     # Band numbers for Green and NIR
+    if len(sys.argv) != 2:
+        # If the number of arguments is wrong, print a helpful message and exit.
+        print("\n--- ERROR: Missing folder path ---")
+        print("Please provide the path to the image folder as a command-line argument.")
+        print(f"Usage: python {sys.argv[0]} <path_to_your_folder>")
+        print(r"Example: python water_area.py E:\Kantubek")
+        sys.exit(1)  # Exit the script with an error code
+    # --- Parameters for your specific data ---
+    # Band numbers for Green and NIR
+    image_folder = sys.argv[1]
     GREEN_BAND_IN_FILE = 1
     NIR_BAND_IN_FILE = 4
     RED_BAND_IN_FILE = 3
@@ -152,4 +162,5 @@ if __name__ == '__main__':
 
         # --- After processing all files, generate the plot ---
         print("\n--- All files processed. Generating plot... ---")
+
         plot_area_over_time(time_series_results)
